@@ -28,7 +28,7 @@ def main():
         print(f"Audio upload failed:\n\n{e}")
         return 1
     print("Done!")
-    
+
     upload_url = resp_upload.json()["upload_url"]
 
     payload = {
@@ -56,7 +56,7 @@ def main():
 
         if json_result["status"] == "completed":
             print("\n\nDone!")
-            
+
             Path("transcript_raw.txt").write_text(json_result["text"])
             Path("utterances.json").write_text(json.dumps(json_result["utterances"]))
 
