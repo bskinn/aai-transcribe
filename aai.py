@@ -62,7 +62,7 @@ def main():
 
             text_split = ""
             for u in json_result["utterances"]:
-                text_split += f"{u['speaker']}: {u['text']}\n\n"
+                text_split += f"[[{u['speaker']}]]: {u['text']}\n\n"
 
             Path("transcript_split.txt").write_text(text_split)
             return 0
