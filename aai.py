@@ -50,7 +50,7 @@ def main():
     polling_endpoint = f"{BASE_URL}/transcript/{transcript_id}"
 
     print("Awaiting transcription:")
-    while tqdm(itt.count()):
+    for _ in tqdm(itt.count()):
         resp_result = rq.get(polling_endpoint, headers=headers)
         json_result = resp_result.json()
 
