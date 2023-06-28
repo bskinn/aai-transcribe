@@ -12,6 +12,21 @@ from tqdm import tqdm
 
 BASE_URL = "https://api.assemblyai.com/v2"
 
+UTTERANCE_FORMAT = "[[{speaker}]] ({timestamp}): {text}\n\n"
+
+
+def make_timestamp(milliseconds):
+    seconds = milliseconds // 1000
+
+    seconds -= (hours := seconds // 3600) * 3600
+    seconds -= (minutes := seconds // 60) * 60
+
+    return (
+        f"{hours}:{minutes:>02}:{seconds:>02}"
+        if hours
+        else f"{minutes:>02}:{seconds:>02}"
+    )
+
 
 def main():
     if len(sys.argv) != 2:
@@ -36,7 +51,7 @@ def main():
         "speaker_labels": True,
     }
 
-    print("Attempting to submit transcription...", end="")
+    print("Attempting to submit transcription request...", end="")
     try:
         resp_transcribe = rq.post(
             BASE_URL + "/transcript", json=payload, headers=headers
@@ -62,7 +77,11 @@ def main():
 
             text_split = ""
             for u in json_result["utterances"]:
-                text_split += f"[[{u['speaker']}]]: {u['text']}\n\n"
+                text_split += UTTERANCE_FORMAT.format(
+                    speaker=u["speaker"],
+                    timestamp=make_timestamp(u["start"]),
+                    text=u["text"],
+                )
 
             Path("transcript_split.txt").write_text(text_split)
             return 0
