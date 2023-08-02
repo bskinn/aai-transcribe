@@ -45,6 +45,7 @@ def main():
     print("Done!")
 
     upload_url = resp_upload.json()["upload_url"]
+    print(f"Audio URL: {upload_url}\n")
 
     payload = {
         "audio_url": upload_url,
@@ -63,6 +64,7 @@ def main():
 
     transcript_id = resp_transcribe.json()["id"]
     polling_endpoint = f"{BASE_URL}/transcript/{transcript_id}"
+    print(f"Transcript ID: {transcript_id}\n")
 
     print("Awaiting transcription:")
     for _ in tqdm(itt.count()):
