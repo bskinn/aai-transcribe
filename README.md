@@ -52,3 +52,7 @@ AssemblyAI does not have access to the names of the speakers, so the script outp
 anonymized labels for the transcription instead (e.g., `[[A]]` and `[[B]]`). It's thus
 necessary to manually do a find-and-replace to swap in each speaker's name in place
 of their name placeholder.
+
+The speaker identification is usually fairly reliable with two or three unique speakers.
+With larger groups, inaccuracies are common. Manual cross-checking of all speaker names
+is a good idea.
