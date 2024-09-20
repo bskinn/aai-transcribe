@@ -3,6 +3,10 @@
 Helper repo for submitting an audio file to AssemblyAI for
 diarized transcription.
 
+**NOTE:** I don't have any plans for further development on this,
+or to keep it updated as Python and the AssemblyAI API evolves,
+so I'm archiving it.
+
 ## Setup
 
 Clone the repo:
